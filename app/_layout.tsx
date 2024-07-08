@@ -9,6 +9,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
+import { useInitializeClient } from "@/src/graphql/useInitClient";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -22,16 +23,18 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  const client = new ApolloClient({
-    uri: "https://swapi-graphql.netlify.app/.netlify/functions/index",
-    cache: new InMemoryCache(),
-  });
+  const client = useInitializeClient();
 
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+
+  if (!client) {
+        // You can return a loading screen or null while the client is being initialized
+        return null;
+    }
 
   if (!loaded) {
     return null;

@@ -1,4 +1,4 @@
-import { AllPeopleQueryResult } from "@/src/graphql/generated";
+import { AllPeopleQueryResult, useAllFilmsLazyQuery, useAllPeopleQuery } from "@/src/graphql/generated";
 import { gql, useQuery } from "@apollo/client";
 import {
   FlatList,
@@ -19,18 +19,7 @@ export default function HomeScreen() {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const { data, loading }: AllPeopleQueryResult = useQuery(gql`
-    {
-      allPeople {
-        edges {
-          node {
-            id
-            name
-          }
-        }
-      }
-    }
-  `);
+  const { data, networkStatus, refetch } = useAllPeopleQuery()
 
   useEffect(() => {
     console.log(data?.allPeople?.edges);
