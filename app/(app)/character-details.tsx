@@ -37,7 +37,9 @@ export const CharacterDetailsScreen: React.FC = () => {
     variables: { id },
   });
 
-  console.log(data)
+  if (error) {
+    console.log('Error listing films', error)
+  }
 
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error! {error.message}</Text>;
