@@ -1,5 +1,5 @@
 import styled from '@emotion/native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import {
   View,
   FlatList,
@@ -8,9 +8,8 @@ import {
   StyleSheet,
   RefreshControl,
 } from 'react-native'
-import { Header, SearchBar } from '@rneui/themed'
+import { SearchBar } from '@rneui/themed'
 import CharacterCard from '@/components/CharacterCard'
-import { ActivityIndicator } from 'react-native'
 import { NetworkStatus } from '@apollo/client'
 import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons' // Import icons
@@ -18,6 +17,7 @@ import Icon from 'react-native-vector-icons/Ionicons' // Import icons
 type CharacterListScreenProps = {
   data: any[]
   refetch: any
+  onSelectCharacter: (id: string, characterName: string) => void
   onSearch: (text: string) => void
   searchQuery: string
   toggleOrder: () => void
@@ -27,11 +27,20 @@ type CharacterListScreenProps = {
 export const CharacterListScreen: React.FC<CharacterListScreenProps> = ({
   data,
   refetch,
+  onSelectCharacter,
   onSearch,
   searchQuery,
   toggleOrder,
   order,
 }) => {
+
+  const renderListItem = useCallback(({item}: {item: any}) => {
+    return (
+      <TouchableHighlight onPress={() => onSelectCharacter(item.node.id, item.node.name)}>
+            <CharacterCard name={item.node.name} />
+      </TouchableHighlight>
+    )
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -64,11 +73,7 @@ export const CharacterListScreen: React.FC<CharacterListScreenProps> = ({
           />
         }
         keyExtractor={(item) => item.node.id}
-        renderItem={({ item }) => (
-          <TouchableHighlight>
-            <CharacterCard name={item.node.name} />
-          </TouchableHighlight>
-        )}
+        renderItem={renderListItem}
       />
     </View>
   )

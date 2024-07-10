@@ -59,7 +59,6 @@ export default function AppLayout() {
         <ApolloProvider client={client}>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="not-found" />
           </Stack> 
         </ApolloProvider>
       </ThemeProvider>

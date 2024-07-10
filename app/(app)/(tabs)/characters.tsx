@@ -1,5 +1,5 @@
 import { useAllPeopleQuery } from '@/src/graphql/generated'
-import {  NetworkStatus } from '@apollo/client'
+import { NetworkStatus } from '@apollo/client'
 import React, { useMemo, useState } from 'react'
 import CharacterListScreen from '@/screens/characters/CharacterListScreen'
 import { router } from 'expo-router'
@@ -8,7 +8,6 @@ import { Header } from '@rneui/base'
 import styled from '@emotion/native'
 
 export default function CharacterList() {
-
   const { data, networkStatus, error, refetch } = useAllPeopleQuery()
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [order, setOrder] = useState<'ASC' | 'DESC'>('ASC')
@@ -17,8 +16,14 @@ export default function CharacterList() {
     setSearchQuery(text)
   }
 
-  const handleCharacterPress = (id: string | undefined) => {
-    router.push({ pathname: '/character-details', params: { id: id }})
+  const handleCharacterPress = (
+    id: string | undefined,
+    name: string | undefined
+  ) => {
+    router.navigate({
+      pathname: '/character/[id]',
+      params: { id: id, name: name },
+    })
   }
 
   const toggleOrder = () => {
@@ -68,6 +73,7 @@ export default function CharacterList() {
       <CharacterListScreen
         data={orderedCharacters}
         refetch={refetch}
+        onSelectCharacter={handleCharacterPress}
         onSearch={handleSearch}
         searchQuery={searchQuery}
         toggleOrder={toggleOrder}

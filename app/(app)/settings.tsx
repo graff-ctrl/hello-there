@@ -1,23 +1,21 @@
 // screens/SettingsScreen.tsx
 import { useSession } from '@/ctx'
-import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function SettingsScreen() {
   const { signOut } = useSession()
   const handleLogout = () => {
     signOut()
-  }
+  };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutButtonText}>
-          It's over...I have the high ground (Logout)
-        </Text>
+        <Text style={styles.logoutButtonText}>It's over...I have the high ground (Logout)</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -40,4 +38,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-})
+});

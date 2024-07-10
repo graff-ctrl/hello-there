@@ -1,11 +1,7 @@
-import {
-  StyleSheet,
-  View,
-  useColorScheme,
-} from 'react-native'
+import { StyleSheet, View, useColorScheme } from 'react-native'
 import { Header, ListItem } from '@rneui/themed'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Import the icon from the library
+import Icon from 'react-native-vector-icons/MaterialIcons' // Import the icon from the library
 import { useSession } from '@/ctx'
 import { FilmListScreen } from '@/screens/films'
 
@@ -34,8 +30,9 @@ export default function Films() {
         style={{
           flex: 1,
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}>
-          <FilmListScreen/>
+        }}
+      >
+        <FilmListScreen />
       </View>
     </>
   )

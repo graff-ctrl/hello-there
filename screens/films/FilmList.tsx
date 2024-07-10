@@ -14,6 +14,18 @@ import SearchBar from '@/components/SearchBar'
 import { useAllFilmsQuery, useAllPeopleQuery } from '@/src/graphql/generated'
 import { NetworkStatus } from '@apollo/client'
 
+
+type FilmListScreenProps = {
+  data: any[]
+  refetch: any
+  onSelectCharacter: (id: string, characterName: string) => void
+  onSearch: (text: string) => void
+  searchQuery: string
+  toggleOrder: () => void
+  order: 'ASC' | 'DESC'
+}
+
+
 export const FilmListScreen: React.FC = () => {
   const { data, networkStatus, refetch } = useAllFilmsQuery()
   const [searchQuery, setSearchQuery] = useState<string>('')

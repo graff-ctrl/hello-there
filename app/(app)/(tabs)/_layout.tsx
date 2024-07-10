@@ -1,21 +1,22 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from 'expo-router'
+import React from 'react'
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { TabBarIcon } from '@/components/navigation/TabBarIcon'
+import { Colors } from '@/constants/Colors'
+import { useColorScheme } from '@/hooks/useColorScheme'
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
 
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-      }}>
-        <Tabs.Screen
-        name="index"
+      }}
+    >
+      <Tabs.Screen
+        name='home'
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
@@ -24,7 +25,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="characters"
+        name='characters'
         options={{
           title: 'Characters',
           tabBarIcon: ({ color, focused }) => (
@@ -33,7 +34,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="films"
+        name='films'
         options={{
           title: 'Films',
           tabBarIcon: ({ color, focused }) => (
@@ -42,7 +43,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name='settings'
         options={{
           title: 'Settings',
           tabBarIcon: ({ color }) => (
@@ -51,5 +52,5 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
-  );
+  )
 }

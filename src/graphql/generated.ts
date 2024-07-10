@@ -1315,6 +1315,13 @@ export type AllFilmsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AllFilmsQuery = { __typename?: 'Root', allFilms?: { __typename?: 'FilmsConnection', films?: Array<{ __typename?: 'Film', title?: string | null, episodeID?: number | null, openingCrawl?: string | null, director?: string | null, producers?: Array<string | null> | null, releaseDate?: string | null, created?: string | null, edited?: string | null, id: string } | null> | null } | null };
 
+export type GetCharacterQueryVariables = Exact<{
+  characterId: Scalars['ID']['input'];
+}>;
+
+
+export type GetCharacterQuery = { __typename?: 'Root', person?: { __typename?: 'Person', birthYear?: string | null, created?: string | null, edited?: string | null, gender?: string | null, hairColor?: string | null, height?: number | null, id: string, name?: string | null, filmConnection?: { __typename?: 'PersonFilmsConnection', films?: Array<{ __typename?: 'Film', id: string, title?: string | null } | null> | null } | null, homeworld?: { __typename?: 'Planet', name?: string | null } | null } | null };
+
 
 export const AllPeopleDocument = gql`
     query AllPeople {
@@ -1409,3 +1416,59 @@ export type AllFilmsQueryHookResult = ReturnType<typeof useAllFilmsQuery>;
 export type AllFilmsLazyQueryHookResult = ReturnType<typeof useAllFilmsLazyQuery>;
 export type AllFilmsSuspenseQueryHookResult = ReturnType<typeof useAllFilmsSuspenseQuery>;
 export type AllFilmsQueryResult = Apollo.QueryResult<AllFilmsQuery, AllFilmsQueryVariables>;
+export const GetCharacterDocument = gql`
+    query GetCharacter($characterId: ID!) {
+  person(id: $characterId) {
+    birthYear
+    created
+    edited
+    filmConnection {
+      films {
+        id
+        title
+      }
+    }
+    gender
+    hairColor
+    height
+    homeworld {
+      name
+    }
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useGetCharacterQuery__
+ *
+ * To run a query within a React component, call `useGetCharacterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCharacterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCharacterQuery({
+ *   variables: {
+ *      characterId: // value for 'characterId'
+ *   },
+ * });
+ */
+export function useGetCharacterQuery(baseOptions: Apollo.QueryHookOptions<GetCharacterQuery, GetCharacterQueryVariables> & ({ variables: GetCharacterQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCharacterQuery, GetCharacterQueryVariables>(GetCharacterDocument, options);
+      }
+export function useGetCharacterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCharacterQuery, GetCharacterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCharacterQuery, GetCharacterQueryVariables>(GetCharacterDocument, options);
+        }
+export function useGetCharacterSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetCharacterQuery, GetCharacterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetCharacterQuery, GetCharacterQueryVariables>(GetCharacterDocument, options);
+        }
+export type GetCharacterQueryHookResult = ReturnType<typeof useGetCharacterQuery>;
+export type GetCharacterLazyQueryHookResult = ReturnType<typeof useGetCharacterLazyQuery>;
+export type GetCharacterSuspenseQueryHookResult = ReturnType<typeof useGetCharacterSuspenseQuery>;
+export type GetCharacterQueryResult = Apollo.QueryResult<GetCharacterQuery, GetCharacterQueryVariables>;

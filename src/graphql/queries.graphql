@@ -25,22 +25,24 @@ query AllFilms {
   }
 }
 
-query GetCharacter($id: ID!) {
-  person(id: $id) {
-    name
+query GetCharacter($characterId: ID!) {
+  person(id: $characterId) {
     birthYear
+    created
+    edited
+    filmConnection {
+      films {
+        id
+        title
+      }
+    }
     gender
     hairColor
     height
     homeworld {
-      id
-    }
-    species {
-      id
       name
-      designation
-      
     }
-
+    id
+    name
   }
 }
