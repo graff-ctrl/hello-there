@@ -37,6 +37,8 @@ export const CharacterDetailsScreen: React.FC = () => {
     variables: { id },
   });
 
+  console.log(data)
+
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error! {error.message}</Text>;
 
@@ -46,3 +48,6 @@ export const CharacterDetailsScreen: React.FC = () => {
     </View>
   );
 };
+
+export default CharacterDetailsScreen
+

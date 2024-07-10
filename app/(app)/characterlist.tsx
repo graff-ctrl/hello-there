@@ -25,7 +25,7 @@ export const CharacterListScreen: React.FC = () => {
   }
 
   const handleCharacterPress = (id: string | undefined) => {
-    router.push({ pathname: '/details/characterdetails', params: { id: id }})
+    router.push({ pathname: '/character-details', params: { id: id }})
   }
 
   const toggleOrder = () => {
