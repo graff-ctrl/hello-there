@@ -1,9 +1,9 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, ViewProps } from 'react-native';
+import React from 'react'
+import { View, Text, Image, StyleSheet, ViewProps } from 'react-native'
 
 const styles = StyleSheet.create({
   wrapper: {
-    shadowColor: "#000000",
+    shadowColor: '#000000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -12,27 +12,27 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 2,
     borderRadius: 24,
-    backgroundColor: "#fbfbfb",
-    flexDirection: "row",
+    backgroundColor: '#fbfbfb',
+    flexDirection: 'row',
     marginBottom: 32,
   },
   innerWrapper: {
-    width: "40%",
-    overflow: "hidden",
+    width: '40%',
+    overflow: 'hidden',
     borderTopLeftRadius: 24,
     borderBottomLeftRadius: 24,
   },
   title: {
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: '500',
     padding: 16,
-    alignSelf: "center",
-  }
-});
+    alignSelf: 'center',
+  },
+})
 
 export type CharacterCardProps = {
-  name: string;
-} & ViewProps;
+  name: string
+} & ViewProps
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ name, ...props }) => {
   return (
@@ -41,7 +41,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ name, ...props }) => {
         <Text style={styles.title}>{name}</Text>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default CharacterCard;
+export default CharacterCard

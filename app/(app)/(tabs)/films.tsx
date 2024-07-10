@@ -1,20 +1,16 @@
-import { AllPeopleQueryResult } from '@/src/graphql/generated'
-import { gql, useQuery } from '@apollo/client'
 import {
-  FlatList,
-  SafeAreaView,
   StyleSheet,
-  TouchableHighlight,
   View,
   useColorScheme,
 } from 'react-native'
 import { Header, ListItem } from '@rneui/themed'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
-import { useEffect } from 'react'
-import CharacterCard from '@/components/CharacterCard'
-import { CharacterListScreen } from '@/screens/characters'
+import Icon from 'react-native-vector-icons/MaterialIcons'; // Import the icon from the library
+import { useSession } from '@/ctx'
+import { FilmListScreen } from '@/screens/films'
 
-export default function HomeScreen() {
+export default function Films() {
+  const { signOut } = useSession()
   const isDarkMode = useColorScheme() === 'dark'
 
   const backgroundStyle = {
@@ -38,9 +34,8 @@ export default function HomeScreen() {
         style={{
           flex: 1,
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}
-      >
-        <CharacterListScreen/>
+        }}>
+          <FilmListScreen/>
       </View>
     </>
   )

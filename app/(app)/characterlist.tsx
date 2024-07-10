@@ -13,6 +13,7 @@ import CharacterCard from '@/components/CharacterCard'
 import SearchBar from '@/components/SearchBar'
 import { useAllPeopleQuery } from '@/src/graphql/generated'
 import { NetworkStatus } from '@apollo/client'
+import { router } from 'expo-router'
 
 export const CharacterListScreen: React.FC = () => {
   const { data, networkStatus, refetch } = useAllPeopleQuery()
@@ -21,6 +22,10 @@ export const CharacterListScreen: React.FC = () => {
 
   const handleSearch = (text: string) => {
     setSearchQuery(text)
+  }
+
+  const handleCharacterPress = (id: string | undefined) => {
+    router.push({ pathname: '/details/characterdetails', params: { id: id }})
   }
 
   const toggleOrder = () => {
@@ -80,7 +85,12 @@ export const CharacterListScreen: React.FC = () => {
         data={orderedCharacters}
         keyExtractor={(item) => item?.node?.id || ''}
         renderItem={({ item }) => (
-          <CharacterCard name={item?.node?.name ?? ''} />
+          <TouchableOpacity onPress={() => {
+            const id = item?.node ? item.node.id : ''
+            handleCharacterPress(id)
+          }}>
+            <CharacterCard name={item?.node?.name ?? ''} />
+          </TouchableOpacity>
         )}
       />
     </View>
@@ -120,3 +130,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 })
+
+export default CharacterListScreen
