@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const apiKey = undefined
+
 const gptInstace = axios.create({
   baseURL: "https://api.openai.com/v1/chat/completions",
   headers: {
