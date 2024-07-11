@@ -1,9 +1,19 @@
 import { View, Text, StyleSheet } from 'react-native'
+import UseTheForceButton from '@/components/UseTheForce';
+import { router, Stack } from 'expo-router'
 
-export default function Tab() {
+export default function Home() {
+
+  
+
+  const handleTheForce = () => {
+    router.navigate('/chat')
+  }
+  
   return (
     <View style={styles.container}>
-      <Text>Tab [Home|Settings]</Text>
+      <UseTheForceButton title='Guess the Star War Character' onPressed={handleTheForce} />
+      <UseTheForceButton title='Guess the Star War Movie' onPressed={handleTheForce} />
     </View>
   )
 }

@@ -46,3 +46,23 @@ query GetCharacter($characterId: ID!) {
     name
   }
 }
+
+query GetCharacterListForGuess {
+  allPeople {
+    people {
+      filmConnection {
+        films {
+          title
+        }
+      }
+      gender
+      homeworld {
+        name
+      }
+      name
+      species {
+        name
+      }
+    }
+  }
+}

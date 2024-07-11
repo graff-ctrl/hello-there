@@ -1,5 +1,4 @@
-import styled from '@emotion/native'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState } from "react"
 import {
   View,
   FlatList,
@@ -7,12 +6,12 @@ import {
   TouchableHighlight,
   StyleSheet,
   RefreshControl,
-} from 'react-native'
-import { SearchBar } from '@rneui/themed'
-import CharacterCard from '@/components/CharacterCard'
-import { NetworkStatus } from '@apollo/client'
-import { TouchableOpacity } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons' // Import icons
+} from "react-native"
+import { SearchBar } from "@rneui/themed"
+import CharacterCard from "@/components/CharacterCard"
+import { NetworkStatus } from "@apollo/client"
+import { TouchableOpacity } from "react-native"
+import Icon from "react-native-vector-icons/Ionicons" // Import icons
 
 type CharacterListScreenProps = {
   data: any[]
@@ -21,7 +20,7 @@ type CharacterListScreenProps = {
   onSearch: (text: string) => void
   searchQuery: string
   toggleOrder: () => void
-  order: 'ASC' | 'DESC'
+  order: "ASC" | "DESC"
 }
 
 export const CharacterListScreen: React.FC<CharacterListScreenProps> = ({
@@ -33,11 +32,12 @@ export const CharacterListScreen: React.FC<CharacterListScreenProps> = ({
   toggleOrder,
   order,
 }) => {
-
-  const renderListItem = useCallback(({item}: {item: any}) => {
+  const renderListItem = useCallback(({ item }: { item: any }) => {
     return (
-      <TouchableHighlight onPress={() => onSelectCharacter(item.node.id, item.node.name)}>
-            <CharacterCard name={item.node.name} />
+      <TouchableHighlight
+        onPress={() => onSelectCharacter(item.node.id, item.node.name)}
+      >
+        <CharacterCard name={item.node.name} />
       </TouchableHighlight>
     )
   }, [])
@@ -45,20 +45,20 @@ export const CharacterListScreen: React.FC<CharacterListScreenProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-          <SearchBar
-            placeholder='Search...'
-            value={searchQuery}
-            onChangeText={onSearch}
-            lightTheme
-            round
-            containerStyle={styles.searchBarContainer}
-            inputContainerStyle={styles.searchBarInputContainer}
-          />
+        <SearchBar
+          placeholder="Search..."
+          value={searchQuery}
+          onChangeText={onSearch}
+          lightTheme
+          round
+          containerStyle={styles.searchBarContainer}
+          inputContainerStyle={styles.searchBarInputContainer}
+        />
         <TouchableOpacity style={styles.sortButton} onPress={toggleOrder}>
           <Icon
-            name={order === 'ASC' ? 'arrow-up' : 'arrow-down'}
+            name={order === "ASC" ? "arrow-up" : "arrow-down"}
             size={20}
-            color='#333'
+            color="#333"
           />
         </TouchableOpacity>
       </View>
@@ -82,27 +82,27 @@ export const CharacterListScreen: React.FC<CharacterListScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   topContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
   headerText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
   },
   searchBarContainer: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderTopWidth: 0,
     borderBottomWidth: 0,
     flex: 1,
     paddingRight: 8,
   },
   searchBarInputContainer: {
-    backgroundColor: '#e9e9e9',
+    backgroundColor: "#e9e9e9",
   },
   flatListContent: {
     padding: 16,
@@ -110,13 +110,13 @@ const styles = StyleSheet.create({
   sortButton: {
     padding: 8,
     borderRadius: 20,
-    backgroundColor: '#ddd',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#ddd",
+    justifyContent: "center",
+    alignItems: "center",
   },
   flatList: {
     flex: 1,
-  }
+  },
 })
 
 export default CharacterListScreen

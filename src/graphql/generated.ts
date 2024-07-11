@@ -1322,12 +1322,10 @@ export type GetCharacterQueryVariables = Exact<{
 
 export type GetCharacterQuery = { __typename?: 'Root', person?: { __typename?: 'Person', birthYear?: string | null, created?: string | null, edited?: string | null, gender?: string | null, hairColor?: string | null, height?: number | null, id: string, name?: string | null, filmConnection?: { __typename?: 'PersonFilmsConnection', films?: Array<{ __typename?: 'Film', id: string, title?: string | null } | null> | null } | null, homeworld?: { __typename?: 'Planet', name?: string | null } | null } | null };
 
-export type FilmQueryVariables = Exact<{
-  filmId?: InputMaybe<Scalars['ID']['input']>;
-}>;
+export type GetCharacterListForGuessQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FilmQuery = { __typename?: 'Root', film?: { __typename?: 'Film', director?: string | null, producers?: Array<string | null> | null, releaseDate?: string | null } | null };
+export type GetCharacterListForGuessQuery = { __typename?: 'Root', allPeople?: { __typename?: 'PeopleConnection', people?: Array<{ __typename?: 'Person', gender?: string | null, name?: string | null, filmConnection?: { __typename?: 'PersonFilmsConnection', films?: Array<{ __typename?: 'Film', title?: string | null } | null> | null } | null, homeworld?: { __typename?: 'Planet', name?: string | null } | null, species?: { __typename?: 'Species', name?: string | null } | null } | null> | null } | null };
 
 
 export const AllPeopleDocument = gql`
@@ -1376,7 +1374,7 @@ export type AllPeopleSuspenseQueryHookResult = ReturnType<typeof useAllPeopleSus
 export type AllPeopleQueryResult = Apollo.QueryResult<AllPeopleQuery, AllPeopleQueryVariables>;
 export const AllFilmsDocument = gql`
     query AllFilms {
-  allFilms(first: null) {
+  allFilms {
     films {
       title
       episodeID
@@ -1479,45 +1477,56 @@ export type GetCharacterQueryHookResult = ReturnType<typeof useGetCharacterQuery
 export type GetCharacterLazyQueryHookResult = ReturnType<typeof useGetCharacterLazyQuery>;
 export type GetCharacterSuspenseQueryHookResult = ReturnType<typeof useGetCharacterSuspenseQuery>;
 export type GetCharacterQueryResult = Apollo.QueryResult<GetCharacterQuery, GetCharacterQueryVariables>;
-export const FilmDocument = gql`
-    query Film($filmId: ID) {
-  film(filmID: $filmId) {
-    director
-    producers
-    releaseDate
+export const GetCharacterListForGuessDocument = gql`
+    query GetCharacterListForGuess {
+  allPeople {
+    people {
+      filmConnection {
+        films {
+          title
+        }
+      }
+      gender
+      homeworld {
+        name
+      }
+      name
+      species {
+        name
+      }
+    }
   }
 }
     `;
 
 /**
- * __useFilmQuery__
+ * __useGetCharacterListForGuessQuery__
  *
- * To run a query within a React component, call `useFilmQuery` and pass it any options that fit your needs.
- * When your component renders, `useFilmQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetCharacterListForGuessQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCharacterListForGuessQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFilmQuery({
+ * const { data, loading, error } = useGetCharacterListForGuessQuery({
  *   variables: {
- *      filmId: // value for 'filmId'
  *   },
  * });
  */
-export function useFilmQuery(baseOptions?: Apollo.QueryHookOptions<FilmQuery, FilmQueryVariables>) {
+export function useGetCharacterListForGuessQuery(baseOptions?: Apollo.QueryHookOptions<GetCharacterListForGuessQuery, GetCharacterListForGuessQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<FilmQuery, FilmQueryVariables>(FilmDocument, options);
+        return Apollo.useQuery<GetCharacterListForGuessQuery, GetCharacterListForGuessQueryVariables>(GetCharacterListForGuessDocument, options);
       }
-export function useFilmLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FilmQuery, FilmQueryVariables>) {
+export function useGetCharacterListForGuessLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCharacterListForGuessQuery, GetCharacterListForGuessQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<FilmQuery, FilmQueryVariables>(FilmDocument, options);
+          return Apollo.useLazyQuery<GetCharacterListForGuessQuery, GetCharacterListForGuessQueryVariables>(GetCharacterListForGuessDocument, options);
         }
-export function useFilmSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<FilmQuery, FilmQueryVariables>) {
+export function useGetCharacterListForGuessSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetCharacterListForGuessQuery, GetCharacterListForGuessQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<FilmQuery, FilmQueryVariables>(FilmDocument, options);
+          return Apollo.useSuspenseQuery<GetCharacterListForGuessQuery, GetCharacterListForGuessQueryVariables>(GetCharacterListForGuessDocument, options);
         }
-export type FilmQueryHookResult = ReturnType<typeof useFilmQuery>;
-export type FilmLazyQueryHookResult = ReturnType<typeof useFilmLazyQuery>;
-export type FilmSuspenseQueryHookResult = ReturnType<typeof useFilmSuspenseQuery>;
-export type FilmQueryResult = Apollo.QueryResult<FilmQuery, FilmQueryVariables>;
+export type GetCharacterListForGuessQueryHookResult = ReturnType<typeof useGetCharacterListForGuessQuery>;
+export type GetCharacterListForGuessLazyQueryHookResult = ReturnType<typeof useGetCharacterListForGuessLazyQuery>;
+export type GetCharacterListForGuessSuspenseQueryHookResult = ReturnType<typeof useGetCharacterListForGuessSuspenseQuery>;
+export type GetCharacterListForGuessQueryResult = Apollo.QueryResult<GetCharacterListForGuessQuery, GetCharacterListForGuessQueryVariables>;
