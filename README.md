@@ -1,4 +1,5 @@
 # Inception Health React-Native Coding Challenge
+![kenobi](https://github.com/graff-ctrl/hello-there/assets/55812507/8e1ede45-d07a-494b-8f99-821ba47e88cc)
 
 Using [Star Wars GraphQL API](https://graphql.org/swapi-graphql), create an _informative_ mobile app that _delights_ Star Wars fans! This will be your opportunity to showcase something you pride yourself on. This could be code organization, animation, testing, UX, UI, app performance, etc. You have as much time as you want to complete the challenge; however, we recommend no more than a few hours. We don't expect a production grade application, just a demonstration of your coding strengths. Play to your strengths with what you choose to build.
 
