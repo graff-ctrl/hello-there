@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ih-mobile-challenge",
-    "slug": "ih-mobile-challenge",
+    "name": "hello-there",
+    "slug": "hello-there",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
