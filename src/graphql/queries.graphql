@@ -10,7 +10,7 @@ query AllPeople {
 }
 
 query AllFilms {
-  allFilms(first: null) {
+  allFilms {
     films {
       title
       episodeID

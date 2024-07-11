@@ -1,5 +1,3 @@
-// CharacterDetailsScreen.tsx
-
 import React from 'react'
 import { NetworkStatus } from '@apollo/client'
 import { View, StyleSheet } from 'react-native'
@@ -8,6 +6,7 @@ import { useGetCharacterQuery } from '@/src/graphql/generated'
 import CharacterDetailsScreen from '@/screens/characters/CharacterDetailsScreen'
 import styled from '@emotion/native'
 import { ActivityIndicator } from 'react-native'
+import { Wrapper } from '@/constants/Wrapper'
 
 export default function CharacterDetails() {
   const params = useLocalSearchParams()
@@ -43,13 +42,6 @@ export default function CharacterDetails() {
     </View>
   )
 }
-
-const Wrapper = styled.View({
-  flex: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: '#fff',
-})
 
 const styles = StyleSheet.create({
   container: {

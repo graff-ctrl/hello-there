@@ -58,28 +58,15 @@ export default function CharacterList() {
   }
 
   return (
-    <>
-      <Header
-        containerStyle={{ flexShrink: 1, borderWidth: 1 }}
-        style={{ flexShrink: 1, borderWidth: 1, borderColor: 'red' }}
-        barStyle='default'
-        centerComponent={{
-          text: 'IH Challenge',
-          style: { flexShrink: 1, color: '#fff' },
-        }}
-        placement='center'
-        statusBarProps={{ hidden: true }}
-      />
-      <CharacterListScreen
-        data={orderedCharacters}
-        refetch={refetch}
-        onSelectCharacter={handleCharacterPress}
-        onSearch={handleSearch}
-        searchQuery={searchQuery}
-        toggleOrder={toggleOrder}
-        order={order}
-      />
-    </>
+    <CharacterListScreen
+      data={orderedCharacters}
+      refetch={refetch}
+      onSelectCharacter={handleCharacterPress}
+      onSearch={handleSearch}
+      searchQuery={searchQuery}
+      toggleOrder={toggleOrder}
+      order={order}
+    />
   )
 }
 

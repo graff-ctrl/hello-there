@@ -22,6 +22,14 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name='earth-americas' color={color} />
           ),
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#ee82ee',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
       <Tabs.Screen
@@ -31,6 +39,14 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name='jedi' color={color} />
           ),
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#556b2f',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
       <Tabs.Screen
@@ -40,6 +56,14 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name='sith' color={color} />
           ),
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#8b0000',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
       <Tabs.Screen
@@ -49,6 +73,14 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <TabBarIcon name='user-gear' color={color} />
           ),
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#dda0dd',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
     </Tabs>

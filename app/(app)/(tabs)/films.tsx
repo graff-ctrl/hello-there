@@ -1,40 +1,93 @@
-import { StyleSheet, View, useColorScheme } from 'react-native'
+import { ActivityIndicator, StyleSheet, View, useColorScheme } from 'react-native'
 import { Header, ListItem } from '@rneui/themed'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 import Icon from 'react-native-vector-icons/MaterialIcons' // Import the icon from the library
 import { useSession } from '@/ctx'
-import { FilmListScreen } from '@/screens/films'
+import { FilmListScreen } from '@/screens/films/FilmListScreen'
+import { FilmsConnection, useAllFilmsQuery } from '@/src/graphql/generated'
+import { useMemo, useState } from 'react'
+import { NetworkStatus } from '@apollo/client'
+import styled from '@emotion/native'
+import { Wrapper } from '@/constants/Wrapper'
+import { router } from 'expo-router'
+
+export type FilmDetailObj = {
+  title: string;
+  director: string;
+  releaseDate: string;
+}
 
 export default function Films() {
-  const { signOut } = useSession()
   const isDarkMode = useColorScheme() === 'dark'
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const { data, networkStatus, refetch } = useAllFilmsQuery()
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [order, setOrder] = useState<'ASC' | 'DESC'>('ASC')
+
+  const handleSearch = (text: string) => {
+    setSearchQuery(text)
+  }
+
+  const handleFilmPress = ( film: FilmDetailObj
+  ) => {
+    router.navigate({
+      pathname: '/film/[id]',
+      params: { 
+        title: film.title,  
+        director: film.director,
+        releaseDate: film.releaseDate
+      },
+    })
+  }
+
+  const toggleOrder = () => {
+    const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
+    setOrder(newOrder)
+  }
+
+  const orderedFilms = useMemo(() => {
+    if (!data?.allFilms?.films) return []
+
+    const filteredData = data.allFilms.films.filter((film) =>
+      film?.title?.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+
+    const sortedData = filteredData.sort((a, b) => {
+      const nameA = a?.title ?? ''
+      const nameB = b?.title ?? ''
+      return order === 'ASC'
+        ? nameA.localeCompare(nameB)
+        : nameB.localeCompare(nameA)
+    })
+
+    return sortedData
+  }, [data, searchQuery, order])
+
+  if (networkStatus == NetworkStatus.loading) {
+    return (
+      <Wrapper>
+        <ActivityIndicator />
+      </Wrapper>
+    )
   }
 
   return (
-    <>
-      <Header
-        containerStyle={{ flexShrink: 1, borderWidth: 1 }}
-        style={{ flexShrink: 1, borderWidth: 1, borderColor: 'red' }}
-        barStyle='default'
-        centerComponent={{
-          text: 'IH Challenge',
-          style: { flexShrink: 1, color: '#fff' },
-        }}
-        placement='center'
-        statusBarProps={{ hidden: true }}
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+      }}
+    >
+      <FilmListScreen 
+      data={orderedFilms} 
+      refetch={refetch} 
+      onFilmSelect={handleFilmPress} 
+      onSearch={handleSearch } 
+      searchQuery={searchQuery} 
+      toggleOrder={toggleOrder}
+      order={order}        
       />
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}
-      >
-        <FilmListScreen />
-      </View>
-    </>
+    </View>
   )
 }
 
